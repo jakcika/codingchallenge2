@@ -19,7 +19,7 @@ services:
       - PGUSER=futureproof
       - PGHOST=db
       - PGPASSWORD=postpass
-      - PGDATABASE=posts
+      - PGDATABASE=post
       - PGPORT=5432
       - NODE_ENV=development
     depends_on:
@@ -31,7 +31,7 @@ services:
     volumes:
       - "dbdata:/var/lib/postgresql/data"
     environment: 
-      - POSTGRES_DB=posts
+      - POSTGRES_DB=post
       - POSTGRES_USER=futureproof
       - POSTGRES_PASSWORD=postpass
 volumes:

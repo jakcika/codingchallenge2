@@ -1,5 +1,5 @@
 const express = require('express');
-const router = express.Router();
+// const router = express.Router();
 
 const Post = require('../models/posts')
 
@@ -15,8 +15,8 @@ async function index (req, res) {
 async function show (req, res) {
     try {
         const post = await Post.findById(req.params.id);
-        const author = await post.authors;
-        res.status(200).json({ ...post, authors });
+        const author = await post.author;
+        res.status(200).json({ ...post, author });
     } catch (err) {
         res.status(500).send(err);
     };

@@ -11,13 +11,13 @@ module.exports = class Post {
     };
 
     static get all(){
-        return new Promise (async (resolve, reject) => {
+        return new Promise (async (res, rej) => {
             try {
                 let postsData = await db.query('SELECT * FROM posts;');
                 let posts = postsData.rows.map(p => new Post(p));
-                resolve (posts);
+                res (posts);
             } catch (err) {
-                reject('Post not found');
+                rej('Post not found');
             }
         });
     }  
@@ -26,11 +26,11 @@ module.exports = class Post {
     static findById(id){
         return new Promise (async (res, rej) => {
             try {
-                let postData = await db.query(`SELECT * FROM posts WHERE posts.id = ${id};`, [ id ]);
+                let postData = await db.query(`SELECT * FROM posts WHERE id = $1;`, [id]);
                 let post = new Post(postData.rows[0]);
                 res(post);
             } catch (err) {
-                reject('Post not found');
+                rej('Specific Post not found');
             }
         });
     };
@@ -40,12 +40,14 @@ module.exports = class Post {
             try {
                 const { id, title, author, body, post_id} = postData;
                 const query = {
-                    text: 'INSERT INTO posts (id, title, author, body, post_id) VALUES () RETURNING *',
+                    text: 'INSERT INTO posts (id, title, author, body, post_id) VALUES ($1, $2, $3, $4, $5) RETURNING *',
                     values: [id, title, author, body, post_id] 
                 };
-                res (result.rows[0]);
+                let newPost = await db.query(query);
+
+                res (newPost.rows[0]);
             } catch (err) {
-                reject('Post could not be created');
+                rej('Post could not be created');
             }
         });
     };
