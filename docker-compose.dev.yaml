@@ -19,7 +19,7 @@ services:
       - PGUSER=futureproof
       - PGHOST=db
       - PGPASSWORD=postpass
-      - PGDATABASE=post
+      - PGDATABASE=posts
       - PGPORT=5432
       - NODE_ENV=development
     depends_on:
@@ -27,7 +27,7 @@ services:
     command: bash -c "npm install && npm run seedDev && npm run dev"
 
   db:
-    container_name: debug_dev_db
+    container_name: dev_db
     volumes:
       - "dbdata:/var/lib/postgresql/data"
     environment: 
@@ -38,5 +38,5 @@ volumes:
   dbdata:
 networks: 
   default:
-    name: server
+    name: api
 
