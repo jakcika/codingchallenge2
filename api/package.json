@@ -16,5 +16,12 @@
   "bugs": {
     "url": "https://github.com/jakcika/codingchallenge2/issues"
   },
-  "homepage": "https://github.com/jakcika/codingchallenge2#readme"
+  "homepage": "https://github.com/jakcika/codingchallenge2#readme",
+  "dependencies": {
+    "pg": "^8.7.1"
+  }
+  
 }
+
+
+
