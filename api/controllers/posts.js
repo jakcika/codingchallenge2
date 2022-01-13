@@ -12,6 +12,7 @@ async function index (req, res) {
     }
 }
 
+
 async function show (req, res) {
     try {
         const post = await Post.findById(req.params.id);
